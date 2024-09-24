@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Component/Navbar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+
 
 function Login() {
   const navigate = useNavigate();

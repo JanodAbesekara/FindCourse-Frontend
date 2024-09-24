@@ -73,17 +73,19 @@ function Profile() {
       );
 
       const user = response.data;
+      console.log(user);
+
       const userRole = user.role;
 
-      console.log("User Role:", userRole);
+     console.log("User Role:", userRole);
 
-      if (userRole === "Admin") {
-        navigate("/ProfileForUser");
-      } else if (userRole === "Student") {
-        navigate("/Profile");
-      } else {
-        window.alert("Unknown role, unable to navigate.");
-      }
+      // if (userRole === "Admin") {
+      //   navigate("/ProfileForUser");
+      // } else if (userRole === "Student") {
+      //   navigate("/Profile");
+      // } else {
+      //   window.alert("Unknown role, unable to navigate.");
+      // }
     } catch (err) {
       console.error("Error fetching user details:", err);
       window.alert("Error fetching user details.");
