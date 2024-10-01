@@ -4,6 +4,7 @@ import axios from "axios";
 function ProfileForUser() {
   const [userData, setUserData] = useState(null);
   const [feedback, setFeedback] = useState("");
+  const [feedbackdata, setFeedbackdata] = useState([]);
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -20,8 +21,8 @@ function ProfileForUser() {
       const response = axios.post(
         `http://localhost:8080/api/V1/addFeedback`,
         data,
-        { withCredentials: true }  
-      )
+        { withCredentials: true }
+      );
       console.log("Feedback data:", data);
       window.alert("Feedback added successfully!");
       setFeedback("");
@@ -69,6 +70,21 @@ function ProfileForUser() {
           />
           <button type="submit">Submit</button>
         </form>
+      </div>
+      <div>
+        <h4>Added Feddbacks</h4>
+        {/* <ul>
+          {feedback.map((feedback) => (
+            <li key={feedback.id}>
+              <p>
+                <strong>Email:</strong> {feedback.useremail}
+              </p>
+              <p>
+                <strong>Feedback:</strong> {feedback.feedback}
+              </p>
+            </li>
+          ))}
+        </ul> */}
       </div>
     </div>
   );
