@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Adminpages() {
   const [feedback, setFeedback] = useState([]);
+  const [useremail, setuseremail] = useState("");
 
   useEffect(() => {
     axios
@@ -34,9 +35,36 @@ function Adminpages() {
       });
   };
 
+  const handlesubmit = (e) => {
+    e.preventDefault();
+
+    const email = useremail;
+
+    console.log(email);
+
+    axios
+      .post(`http://localhost:8080/api/V1/UpdateAdmin?email=${email}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.alert("Admin created successfully!");
+        setuseremail("");
+      })
+      .catch((error) => {
+        console.error("Error creating admin:", error);
+      });
+  };
+
   return (
     <div>
       <h1>Admin page</h1>
+      <p>Create Admin</p>
+      <form onSubmit={handlesubmit}>
+        <label>User Email:</label>
+        <input type="email" onChange={(e) => setuseremail(e.target.value)} />
+        <button type="submit">Create Admin</button>
+      </form>
 
       <h3>Feed backs</h3>
       <ul>
