@@ -1,5 +1,8 @@
 import React from "react";
 import Navbar from "../Component/Navbar";
+import axios from "axios";
+
+
 
 function Home() {
   return (
