@@ -26,22 +26,25 @@ function Home() {
       <Navbar />
       <h1>Home</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter your query"
-        />
-        <button type="submit">Submit</button>
-      </form>
-
       <textarea
+        style={{ width: "100%", height: "500px" }}
         readOnly
         value={data} // Display the returned data
         rows="10"
         cols="50"
       />
+      <form onSubmit={handleSubmit}>
+        <input
+        style={{ width: "80%" , padding: "12px 20px", fontSize: "15px"}}
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter your query"
+        />
+        <button type="submit" 
+         style={{ padding: "12px 20px", fontSize: "15px", marginLeft:"10px"}}
+        >Submit</button>
+      </form>
     </div>
   );
 }
