@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Component/Navbar";
 import axios from "axios";
 import { LuSendHorizonal } from "react-icons/lu";
-import Login from '../Component/Login';
+import Login from "../Component/Login";
 
 function Home() {
   const [clickCount, setClickCount] = useState(0);
@@ -35,14 +35,17 @@ function Home() {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8000/query, {
+      
+      const response = await axios.post("http://localhost:8000/query", {
         query: query,
-      }`);
+      });
+      console.log(response.data.answer);
 
       const fetchedData = response.data.answer;
+     
 
       // Update the last chat entry with the actual response
-      setChatHistory(prevHistory =>
+      setChatHistory((prevHistory) =>
         prevHistory.map((entry, index) =>
           index === prevHistory.length - 1
             ? { ...entry, response: fetchedData }
@@ -52,7 +55,7 @@ function Home() {
     } catch (error) {
       console.error("Error fetching data:", error);
       // Update the last chat entry with an error message
-      setChatHistory(prevHistory =>
+      setChatHistory((prevHistory) =>
         prevHistory.map((entry, index) =>
           index === prevHistory.length - 1
             ? { ...entry, response: "An error occurred while fetching data." }
@@ -71,13 +74,13 @@ function Home() {
 
   const closeLoginModal = () => {
     setIsLoginModalOpen(false); // Close the login modal
-  };  
-  
+  };
 
   return (
-    <div className="flex flex-col h-screen"> {/* Make the main container fill the screen */}
-      <Navbar openLoginModal={openLoginModal} className="fixed"/>
-      
+    <div className="flex flex-col h-screen">
+      {" "}
+      {/* Make the main container fill the screen */}
+      <Navbar openLoginModal={openLoginModal} className="fixed" />
       <div className="bg-gray-20 pb-8 mt-10 mx-10 sm:mx-20 md:mx-50 lg:mx-60 xl:mx-70 flex align-center justify-center">
         {queryEntered ? (
           <div className="flex-1 overflow-y-auto p-4 max-h-[60vh] mb-4 mt-8 mx-5">
@@ -89,21 +92,24 @@ function Home() {
                   </div>
                 </div>
                 <div className="flex justify-start">
-                  <div className="bg-gray-50 text-black p-2 rounded-lg width-full max-w-[90%]">
-                    {chatEntry.response}
+                  <div className="bg-gray-50 text-black p-2 rounded-lg width-full">
+                    <p>{chatEntry.response}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-            <h2 className="text-center pt-60 text-2xl font-semibold">Hello, Search for courses !</h2>
+          <h2 className="text-center pt-60 text-2xl font-semibold">
+            Hello, Search for courses !
+          </h2>
         )}
       </div>
-
       {/* Input container fixed at the bottom */}
       <div className="w-full fixed bottom-0 p-4 bg-white shadow-lg">
-        <form onSubmit={handleSubmit} className="flex justify-center"> {/* Center the input container */}
+        <form onSubmit={handleSubmit} className="flex justify-center">
+          {" "}
+          {/* Center the input container */}
           <div className="relative w-full max-w-lg flex items-center">
             <input
               className="bg-gray-100 text-black p-3 rounded-3xl pl-4 pr-14 w-full sm:w-full md:w-[500px] lg:w-[600px] xl:w-[700px] focus:outline-none"
@@ -121,12 +127,12 @@ function Home() {
           </div>
         </form>
       </div>
-
       {/* Login Modal */}
       {isLoginModalOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <Login closeLoginModal={closeLoginModal} /> {/* Login component inside the modal */}
+            <Login closeLoginModal={closeLoginModal} />{" "}
+            {/* Login component inside the modal */}
           </div>
         </div>
       )}
